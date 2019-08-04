@@ -1,0 +1,25 @@
+Sub Homework()
+    'Find the number of rows in Column A
+    Dim a As Long
+    a = Range("A1", Range("A1").End(xlDown)).Rows.Count
+    
+    'Copy Column A to Column I
+    For x = 1 To a
+        Cells(x, 9).Value = Cells(x + 1, 1).Value
+    Next x
+    
+    'Remove Duplicates
+    Range("I:I").RemoveDuplicates Columns:=1
+    
+    'Find the number of rows in Column I
+    Dim i As Long
+    i = Range("I1", Range("I1").End(xlDown)).Rows.Count
+    
+    'Find the volume of the stock using Sum If
+    Set Range_A = Range("A:A")
+    Set Range_G = Range("G:G")
+    For y = 1 To i
+        Cells(y, 10).Value = WorksheetFunction.SumIf(Range_A, Cells(y, 9).Value, Range_G)
+    Next y
+       
+End Sub
